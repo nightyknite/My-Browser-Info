@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>My Browser Info</title>
+	<style>
+	#app {text-align: center}
+	h1 {font-size: 100%}
+	table,tr,td {with:100%}
+	dl,
+	dt,
+	dd {
+	  box-sizing: border-box;
+	}
+	dl {
+	  background: #FAFAD2;
+	  border-right: 1px solid #ccc;
+	  border-bottom: 1px solid #ccc;
+	  border-left: 1px solid #ccc;
+	}
+	dt,
+	dd {
+	  border-top: 1px solid #ccc;
+	}
+	dt {
+	  width: 40%;
+	  float: left;
+	}
+	dd {
+	  background: #fff;
+	  margin-left: 40%;
+	  border-left: 1px solid #ccc;
+	}
+	dd:after {
+	  content: '';
+	  display: block;
+	  clear: both;
+	}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<h1>My Browser Info</h1>
+
+<dl>
+    <dt>Public IP</dt>
+    <dd>{{ public_ip }}</dd>
+    <dt>UserAgent</dt>
+    <dd>{{ user_agent }}</dd>
+    <dt>Accept-Language</dt>
+    <dd>{{ accept_language }}</dd>
+    <dt>Platform</dt>
+    <dd>{{ platform }}</dd>
+    <dt>Screen Width</dt>
+    <dd>{{ screen_width }}</dd>
+    <dt>Screen Height</dt>
+    <dd>{{ screen_height }}</dd>
+    
+</dl>
+</div>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    public_ip : '',
+    user_agent : '',
+    accept_language : '',
+    platform : '',
+    screen_width : '',
+    screen_height : ''
+
+  },
+  created: function () {
+
+	axios.get("https://api.ipify.org/?format=json")
+    	.then(response => {this.public_ip = response.data.ip}
+    )
+
+    this.user_agent = navigator.userAgent;
+
+    this.accept_language = navigator.languages;
+    
+    this.platform = navigator.platform;
+
+    this.screen_width = parent.screen.width;
+    this.screen_height = parent.screen.height;
+
+    
+
+  }
+
+})
+</script>
+</body>
+</html>
