@@ -59,6 +59,12 @@
     <dd>{{ screen_width }}</dd>
     <dt>Screen Height</dt>
     <dd>{{ screen_height }}</dd>
+    <dt>緯度(latitude)</dt>
+    <dd>{{ latitude }}</dd>
+    <dt>経度(longitude)</dt>
+    <dd>{{ longitude }}</dd>
+    <dt>Google Map</dt>
+    <dd> <img v-bind:src="mapimage_url " v-show="mapimage_url"></dd>
     
 </dl>
 </div>
@@ -66,20 +72,23 @@
 var app = new Vue({
   el: '#app',
   data: {
-    public_ip : '',
     user_agent : '',
     accept_language : '',
     platform : '',
     screen_width : '',
-    screen_height : ''
+    public_ip : '',
+    screen_height : '',
+    latitude : '',
+    longitude : '',
+    mapimage_url : ''
 
   },
   created: function () {
-
+/*
 	axios.get("https://api.ipify.org/?format=json")
     	.then(response => {this.public_ip = response.data.ip}
     )
-
+*/
     this.user_agent = navigator.userAgent;
 
     this.accept_language = navigator.languages;
@@ -89,7 +98,14 @@ var app = new Vue({
     this.screen_width = parent.screen.width;
     this.screen_height = parent.screen.height;
 
-    
+    navigator.geolocation.getCurrentPosition( function(position){
+        app.latitude = position.coords.latitude;
+        app.longitude = position.coords.longitude;
+
+    app.mapimage_url  = "https://maps.googleapis.com/maps/api/staticmap?center=" + app.latitude + "," + app.longitude + "&zoom=13&size=300x300&sensor=false";
+
+
+    } , function(){} , {} );
 
   }
 
