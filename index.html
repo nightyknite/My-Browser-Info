@@ -49,6 +49,8 @@
 <dl>
     <dt>Public IP</dt>
     <dd>{{ public_ip }}</dd>
+    <dt>Private IP</dt>
+    <dd>{{ private_ip }}</dd>
     <dt>UserAgent</dt>
     <dd>{{ user_agent }}</dd>
     <dt>Accept-Language</dt>
@@ -87,6 +89,7 @@ var app = new Vue({
     platform : '',
     screen_width : '',
     public_ip : '',
+    private_ip : '',
     screen_height : '',
     latitude : '',
     longitude : '',
@@ -99,11 +102,9 @@ var app = new Vue({
   created: function () {
 
 	axios.get("https://api.ipify.org/?format=json")
-    	.then(response => {this.public_ip = response.data.ip}
-    )
+    	.then(response => {this.public_ip = response.data.ip})
 
     this.user_agent = navigator.userAgent;
-
 
     this.accept_language = navigator.languages;
     
@@ -200,8 +201,22 @@ var app = new Vue({
         }   
     )
 
-
-   
+    
+    // Private IP
+    // https://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
+    var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
+    pc.createDataChannel('');//create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);// create offer and set local description
+    pc.onicecandidate = function(ice)
+    {
+     if (ice && ice.candidate && ice.candidate.candidate)
+     {
+      var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+          app.private_ip = myIP; 
+          pc.onicecandidate = noop;
+     }
+    };
 
 
   }
