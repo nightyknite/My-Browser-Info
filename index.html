@@ -66,7 +66,7 @@
     <dd>{{ longitude }}</dd>
     <dt>Google Map</dt>
     <dd> <img v-bind:src="mapimage_url" ></dd>
-    
+
     <dt>UserAgent</dt>
     <dd>{{ user_agent }}</dd>
     <dt>OS</dt>
@@ -208,7 +208,7 @@ var app = new Vue({
 
     } else if (ua.indexOf('ipad') > 0
         || ua.indexOf('kindle') > 0
-        || ua.indexOf('Silk') > 0 
+        || ua.indexOf('silk') > 0 
         || (ua.indexOf('android') > 0 && ua.indexOf('tablet') > 0)
         || (ua.indexOf('windows') > 0 && ua.indexOf('touch') > 0)
         ) {
