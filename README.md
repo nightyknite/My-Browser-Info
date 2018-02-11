@@ -1,8 +1,9 @@
 # My-Browser-Info
 
+確認ページ
 https://nightyknite.github.io/My-Browser-Info/index.html
 
-Public IP Address取得はipifyを使用。（利用制限、個人情報の取得はしていないとの事）
+Public IP Address取得はipifyを使用。（Herokuを利用、利用制限はなし、個人情報の取得はしていないとの事）
 https://www.ipify.org/
 
 Private IPはStackOverFlowにあったサンプル。WebRTC用にあるRTCPeerConnectionを利用しているらしい。
