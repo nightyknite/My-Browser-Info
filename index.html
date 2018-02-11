@@ -67,7 +67,7 @@
     <dt>経度(longitude)</dt>
     <dd>{{ longitude }}</dd>
     <dt>Google Map</dt>
-    <dd> <img v-bind:src="mapimage_url " v-show="mapimage_url"></dd>
+    <dd> <img v-bind:src="mapimage_url" ></dd>
 
     <dt>OS</dt>
     <dd>{{ os }}</dd>
@@ -98,7 +98,6 @@ var app = new Vue({
     os : '',
     browser : '',
     vendor_fragments : ''
-
   },
   created: function () {
 
@@ -132,10 +131,8 @@ var app = new Vue({
         os = "iPhone";
     } else if (ua.indexOf("ipad") > 0) {
         os = "iPad";
-    } else if ((ua.indexOf("android") > 0) && (ua.indexOf("mobile") > 0))  {
-        os = "Android Mobile";
     } else if (ua.indexOf("android") > 0) {
-        os = "Android";
+        os = ua.match(/android [0-9.]*/gi)[0];
     } else if (ua.indexOf("windows nt 6.1") > 0) {
         os = "Windows7";
     } else if (ua.indexOf("windows nt 6.2") > 0) {
@@ -171,18 +168,16 @@ var app = new Vue({
         browser = "iPhone";
     } else if (ua.indexOf("ipad") > 0) {
         browser = "iPad";
-    } else if ((ua.indexOf("android") > 0) && (ua.indexOf("mobile") > 0))  {
-        browser = "Android Mobile";
     } else if (ua.indexOf("trident/7.0") > 0) {
         browser = "IE11";
     } else if (ua.indexOf("edge") > 0) {
         browser = "MicroSoft Edge";
     } else if (ua.indexOf("firefox") > 0) {
-        browser = "FireFox";        
+        browser = ua.match(/firefox\/[0-9.]*/gi)[0];        
     } else if (ua.indexOf("opr") > 0) {
         browser = "Opera";
     } else if (ua.indexOf("chrome") > 0) {
-        browser = "Chrome";
+        browser = ua.match(/chrome\/[0-9.]*/gi)[0];
     } else if (ua.indexOf("safari") > 0) {
         browser = "Safari";
     }
