@@ -65,6 +65,16 @@
     <dd>{{ longitude }}</dd>
     <dt>Google Map</dt>
     <dd> <img v-bind:src="mapimage_url " v-show="mapimage_url"></dd>
+
+    <dt>OS</dt>
+    <dd>{{ os }}</dd>
+
+    <dt>Browser</dt>
+    <dd>{{ browser }}</dd>
+
+    <dt>Vendor Fragments</dt>
+    <dd>{{ vendor_fragments }}</dd>
+    
     
 </dl>
 </div>
@@ -80,7 +90,10 @@ var app = new Vue({
     screen_height : '',
     latitude : '',
     longitude : '',
-    mapimage_url : ''
+    mapimage_url : '',
+    os : '',
+    browser : '',
+    vendor_fragments : ''
 
   },
   created: function () {
@@ -91,6 +104,7 @@ var app = new Vue({
 
     this.user_agent = navigator.userAgent;
 
+
     this.accept_language = navigator.languages;
     
     this.platform = navigator.platform;
@@ -98,6 +112,7 @@ var app = new Vue({
     this.screen_width = parent.screen.width;
     this.screen_height = parent.screen.height;
 
+    // geolocation
     navigator.geolocation.getCurrentPosition( function(position){
         app.latitude = position.coords.latitude;
         app.longitude = position.coords.longitude;
@@ -106,6 +121,46 @@ var app = new Vue({
 
 
     } , function(){} , {} );
+
+    var ua = navigator.userAgent.toLowerCase();
+
+    // OS
+    var os = "n/a";
+    if (ua.indexOf("iphone") > 0) {
+        os = "iPhone";
+    } else if (ua.indexOf("android") > 0) {
+        os = "Android";
+    } else if (ua.indexOf("windows") > 0) {
+        os = "Windows";
+    } else if (ua.indexOf("mac") > 0) {
+        os = "Mac";
+    } else if (ua.indexOf("linux") > 0) {
+        os = "Linux";
+    }
+
+    this.os = os;
+
+    //
+    var browser = "n/a";
+
+    this.browser = browser;
+
+    // vendor_fragments
+
+    axios.get("vendor_fragments.json")
+        .then(response => {
+            for (var item in response.data) {
+                if (ua.indexOf(item.toLowerCase()) > 0) {
+                  app.vendor_fragments = item + ':' + response.data[item].title;
+                  break;
+                }
+            }
+        }   
+    )
+
+
+   
+
 
   }
 
