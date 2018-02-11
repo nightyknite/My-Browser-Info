@@ -144,6 +144,16 @@ var app = new Vue({
         os = "Windows10";
     } else if (ua.indexOf("windows") > 0) {
         os = "Windows";
+    } else if ((ua.indexOf("mac os x 10_9") > 0) || (ua.indexOf("mac os x 10.9") > 0)) {
+        os = "MacOS X 10.9 Mavericks";
+    } else if ((ua.indexOf("mac os x 10_10") > 0) || (ua.indexOf("mac os x 10.10") > 0)) {
+        os = "MacOS X 10.10 Yosemite";
+    } else if ((ua.indexOf("mac os x 10_11") > 0) || (ua.indexOf("mac os x 10.11") > 0)) {
+        os = "MacOS X 10.11 El Capitan";
+    } else if ((ua.indexOf("mac os x 10_12") > 0) || (ua.indexOf("mac os x 10.12") > 0)) {
+        os = "MacOS X 10.12 Sierra";
+    } else if ((ua.indexOf("mac os x 10_13") > 0) || (ua.indexOf("mac os x 10.13") > 0)) {
+        os = "MacOS X 10.13 High Sierra";
     } else if (ua.indexOf("mac") > 0) {
         os = "Mac";
     } else if (ua.indexOf("linux") > 0) {
