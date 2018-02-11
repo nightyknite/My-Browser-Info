@@ -75,8 +75,12 @@
     <dt>Browser</dt>
     <dd>{{ browser }}</dd>
 
+    <dt>スマートフォン/タブレット</dt>
+    <dd>{{ mobile_type }}</dd>
+
     <dt>Vendor Fragments</dt>
     <dd>{{ vendor_fragments }}</dd>
+
     
     
 </dl>
@@ -97,6 +101,7 @@ var app = new Vue({
     mapimage_url : '',
     os : '',
     browser : '',
+    mobile_type : '',
     vendor_fragments : ''
   },
   created: function () {
@@ -131,6 +136,8 @@ var app = new Vue({
         os = "iPhone";
     } else if (ua.indexOf("ipad") > 0) {
         os = "iPad";
+    } else if (ua.indexOf("ipod") > 0) {
+        os = "iPod";
     } else if (ua.indexOf("android") > 0) {
         os = ua.match(/android [0-9.]*/gi)[0];
     } else if (ua.indexOf("windows nt 6.1") > 0) {
@@ -168,6 +175,8 @@ var app = new Vue({
         browser = "iPhone";
     } else if (ua.indexOf("ipad") > 0) {
         browser = "iPad";
+    } else if (ua.indexOf("ipod") > 0) {
+        browser = "iPod";        
     } else if (ua.indexOf("trident/7.0") > 0) {
         browser = "IE11";
     } else if (ua.indexOf("edge") > 0) {
@@ -183,6 +192,32 @@ var app = new Vue({
     }
 
     this.browser = browser;
+
+
+    // mobile type 
+    var mobile_type = "n/a";
+
+    if (ua.indexOf('iphone') > 0 
+        || ua.indexOf('ipod') > 0 
+        || ua.indexOf('windows phone') > 0
+        || ua.indexOf('blackberry') > 0
+        || (ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0)
+        ) {
+
+       mobile_type = "スマートフォン";
+
+    } else if (ua.indexOf('ipad') > 0
+        || ua.indexOf('kindle') > 0
+        || ua.indexOf('Silk') > 0 
+        || (ua.indexOf('android') > 0 && ua.indexOf('tablet') > 0)
+        || (ua.indexOf('windows') > 0 && ua.indexOf('touch') > 0)
+        ) {
+
+        mobile_type = "タブレット";
+        
+    }
+
+    this.mobile_type = mobile_type;
 
     // vendor_fragments
 
