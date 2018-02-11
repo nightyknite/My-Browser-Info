@@ -128,8 +128,20 @@ var app = new Vue({
     var os = "n/a";
     if (ua.indexOf("iphone") > 0) {
         os = "iPhone";
+    } else if (ua.indexOf("ipad") > 0) {
+        os = "iPad";
+    } else if ((ua.indexOf("android") > 0) && (ua.indexOf("mobile") > 0))  {
+        os = "Android Mobile";
     } else if (ua.indexOf("android") > 0) {
         os = "Android";
+    } else if (ua.indexOf("windows nt 6.1") > 0) {
+        os = "Windows7";
+    } else if (ua.indexOf("windows nt 6.2") > 0) {
+        os = "Windows8";
+    } else if (ua.indexOf("windows nt 6.3") > 0) {
+        os = "Windows8.1";
+    } else if (ua.indexOf("windows nt 10.0") > 0) {
+        os = "Windows10";
     } else if (ua.indexOf("windows") > 0) {
         os = "Windows";
     } else if (ua.indexOf("mac") > 0) {
@@ -140,8 +152,28 @@ var app = new Vue({
 
     this.os = os;
 
-    //
+    // Browser
     var browser = "n/a";
+
+    if (ua.indexOf("iphone") > 0) {
+        browser = "iPhone";
+    } else if (ua.indexOf("ipad") > 0) {
+        browser = "iPad";
+    } else if ((ua.indexOf("android") > 0) && (ua.indexOf("mobile") > 0))  {
+        browser = "Android Mobile";
+    } else if (ua.indexOf("trident/7.0") > 0) {
+        browser = "IE11";
+    } else if (ua.indexOf("edge") > 0) {
+        browser = "MicroSoft Edge";
+    } else if (ua.indexOf("firefox") > 0) {
+        browser = "FireFox";        
+    } else if (ua.indexOf("opr") > 0) {
+        browser = "Opera";
+    } else if (ua.indexOf("chrome") > 0) {
+        browser = "Chrome";
+    } else if (ua.indexOf("safari") > 0) {
+        browser = "Safari";
+    }
 
     this.browser = browser;
 
