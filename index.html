@@ -52,8 +52,6 @@
     <dd>{{ public_ip }}</dd>
     <dt>Private IP</dt>
     <dd>{{ private_ip }}</dd>
-    <dt>UserAgent</dt>
-    <dd>{{ user_agent }}</dd>
     <dt>Accept-Language</dt>
     <dd>{{ accept_language }}</dd>
     <dt>Platform</dt>
@@ -68,7 +66,9 @@
     <dd>{{ longitude }}</dd>
     <dt>Google Map</dt>
     <dd> <img v-bind:src="mapimage_url" ></dd>
-
+    
+    <dt>UserAgent</dt>
+    <dd>{{ user_agent }}</dd>
     <dt>OS</dt>
     <dd>{{ os }}</dd>
 
@@ -214,7 +214,7 @@ var app = new Vue({
         ) {
 
         mobile_type = "タブレット";
-        
+
     }
 
     this.mobile_type = mobile_type;
