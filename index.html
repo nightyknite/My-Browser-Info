@@ -50,8 +50,8 @@
 <dl>
     <dt>Public IP</dt>
     <dd>{{ public_ip }}</dd>
-    <dt>Private IP</dt>
-    <dd>{{ private_ip }}</dd>
+    <dt>ICE Candidate</dt>
+    <dd>{{ candidate }}</dd>
     <dt>Accept-Language</dt>
     <dd>{{ accept_language }}</dd>
     <dt>Platform</dt>
@@ -94,7 +94,7 @@ var app = new Vue({
     platform : '',
     screen_width : '',
     public_ip : '',
-    private_ip : '',
+    candidate : '',
     screen_height : '',
     latitude : '',
     longitude : '',
@@ -247,14 +247,7 @@ var app = new Vue({
         console.log(ice);
         console.log(ice.candidate);
         console.log(ice.candidate.candidate);
-	try {
-          var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
-          app.private_ip = myIP;
-	} catch(e) {
-	  if (ice.candidate.address) {
-            app.private_ip = ice.candidate.address; 
-	  }	
-	}
+        app.candidate = ice.candidate.candidate;
         pc.onicecandidate = noop;
      }
     };
