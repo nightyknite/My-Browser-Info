@@ -8,9 +8,6 @@ var app = new Vue({
     public_ip : '',
     candidate : '',
     screen_height : '',
-    latitude : '',
-    longitude : '',
-    map_url : '',
     os : '',
     browser : '',
     mobile_type : '',
@@ -30,16 +27,6 @@ var app = new Vue({
     this.screen_width = parent.screen.width;
     this.screen_height = parent.screen.height;
 
-    // geolocation
-    navigator.geolocation.getCurrentPosition( function(position){
-        app.latitude = position.coords.latitude;
-        app.longitude = position.coords.longitude;
-
-
-    app.map_url  = "https://maps.google.com/maps?q=" + app.latitude + "," + app.longitude + "";
-
-
-    } , function(){} , {} );
 
     var ua = navigator.userAgent.toLowerCase();
 

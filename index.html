@@ -40,10 +40,8 @@
 	</style>
 </head>
 <body>
-
 <div id="app">
 	<h1>My Browser Info</h1>
-
 <dl>
     <dt>Public IP</dt>
     <dd>{{ public_ip }}</dd>
@@ -57,24 +55,14 @@
     <dd>{{ screen_width }}</dd>
     <dt>Screen Height</dt>
     <dd>{{ screen_height }}</dd>
-    <dt>緯度(latitude)</dt>
-    <dd>{{ latitude }}</dd>
-    <dt>経度(longitude)</dt>
-    <dd>{{ longitude }}</dd>
-    <dt>Google Map</dt>
-    <dd> <a target="_blank" v-bind:href="map_url" >{{ map_url }}</a></dd>
-
     <dt>UserAgent</dt>
     <dd>{{ user_agent }}</dd>
     <dt>OS</dt>
     <dd>{{ os }}</dd>
-
     <dt>Browser</dt>
     <dd>{{ browser }}</dd>
-
     <dt>スマートフォン/タブレット</dt>
     <dd>{{ mobile_type }}</dd>
-
     <dt>Vendor Fragments</dt>
     <dd>{{ vendor_fragments }}</dd>
 </dl>
