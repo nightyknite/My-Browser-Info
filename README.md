@@ -10,6 +10,3 @@ Private IPはStackOverFlowにあったサンプル。WebRTC用にあるRTCPeerCo
 https://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
 ChromeだとPrivate IPが取得できなくなっている。FireFoxの場合は出来る。代わりに元々Private IPなどの情報が含まれていたICE Candidateを出力
 
-緯度経度取得にはGeolocation API呼び出すので、確認ダイアログが出る。
-https://developer.mozilla.org/ja/docs/Web/API/Geolocation/Using_geolocation
-
