@@ -11,7 +11,9 @@ var app = new Vue({
     os : '',
     browser : '',
     mobile_type : '',
-    vendor_fragments : ''
+    vendor_fragments : '',
+    useragentdata_brand : '',
+    useragentdata_version : ''
   },
   created: function () {
 
@@ -132,7 +134,12 @@ var app = new Vue({
         }   
     )
 
-    
+　　 if (navigator.userAgentData) {
+        const uad = navigator.userAgentData;
+        this.useragentdata_brand = uad.brands[0].brand;
+        this.useragentdata_version = uad.brands[0].version;
+    }
+
     // Private IP
     // https://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
