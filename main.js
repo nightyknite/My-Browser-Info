@@ -5,30 +5,37 @@ var app = new Vue({
     accept_language : '',
     platform : '',
     screen_width : '',
+    screen_height : '',
+    browser_window_width : '',
+    browser_window_height : '',
     public_ip : '',
     candidate : '',
-    screen_height : '',
     os : '',
     browser : '',
     mobile_type : '',
     vendor_fragments : '',
     useragentdata_brand : '',
-    useragentdata_version : ''
+    useragentdata_version : '',
+    cpu_core : '',
+    device_memory : ''
   },
   created: function () {
 
+    const self = this;
 	axios.get("https://api.ipify.org/?format=json")
-    	.then(response => {this.public_ip = response.data.ip})
+    	.then(response => {self.public_ip = response.data.ip})
 
-    this.user_agent = navigator.userAgent;
+    self.user_agent = navigator.userAgent;
 
-    this.accept_language = navigator.languages;
+    self.accept_language = navigator.languages;
     
-    this.platform = navigator.platform;
+    self.platform = navigator.platform;
 
-    this.screen_width = parent.screen.width;
-    this.screen_height = parent.screen.height;
+    self.screen_width = parent.screen.width;
+    self.screen_height = parent.screen.height;
 
+    self.cpu_core = navigator.hardwareConcurrency;
+    self.device_memory = navigator.deviceMemory;
 
     var ua = navigator.userAgent.toLowerCase();
 
@@ -62,13 +69,17 @@ var app = new Vue({
         os = "MacOS X 10.12 Sierra";
     } else if ((ua.indexOf("mac os x 10_13") > 0) || (ua.indexOf("mac os x 10.13") > 0)) {
         os = "MacOS X 10.13 High Sierra";
+    } else if ((ua.indexOf("mac os x 10_14") > 0) || (ua.indexOf("mac os x 10.14") > 0)) {
+        os = "MacOS X 10.14 Mojave";
+    } else if ((ua.indexOf("mac os x 10_15") > 0) || (ua.indexOf("mac os x 10.15") > 0)) {
+        os = "MacOS X 10.15 Catalina";
     } else if (ua.indexOf("mac") > 0) {
         os = "Mac";
     } else if (ua.indexOf("linux") > 0) {
         os = "Linux";
     }
 
-    this.os = os;
+    self.os = os;
 
     // Browser
     var browser = "n/a";
@@ -93,7 +104,7 @@ var app = new Vue({
         browser = "Safari";
     }
 
-    this.browser = browser;
+    self.browser = browser;
 
 
     // mobile type 
@@ -127,17 +138,17 @@ var app = new Vue({
         .then(response => {
             for (var item in response.data) {
                 if (ua.indexOf(item.toLowerCase()) > 0) {
-                  app.vendor_fragments = item + ':' + response.data[item].title;
+                  self.vendor_fragments = item + ':' + response.data[item].title;
                   break;
                 }
             }
         }   
     )
-
+    
 　　 if (navigator.userAgentData) {
         const uad = navigator.userAgentData;
-        this.useragentdata_brand = uad.brands[0].brand;
-        this.useragentdata_version = uad.brands[0].version;
+        self.useragentdata_brand = uad.brands[0].brand;
+        self.useragentdata_version = uad.brands[0].version;
     }
 
     // Private IP
@@ -153,10 +164,19 @@ var app = new Vue({
         console.log(ice);
         console.log(ice.candidate);
         console.log(ice.candidate.candidate);
-        app.candidate = ice.candidate.candidate;
+        self.candidate = ice.candidate.candidate;
         pc.onicecandidate = noop;
      }
     };
+
+    self.browser_window_width = window.innerWidth;
+    self.browser_window_height = window.innerHeight;
+
+    window.addEventListener('resize', function() {
+        self.browser_window_width = window.innerWidth;
+        self.browser_window_height = window.innerHeight;
+    }, false);
+
 
 
   }
