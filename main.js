@@ -16,6 +16,12 @@ var app = new Vue({
     vendor_fragments : '',
     useragentdata_brand : '',
     useragentdata_version : '',
+    useragentdata_mobile : '',
+    useragentdata_platform : '',
+    useragentdata_platformversion : '',
+    useragentdata_architecture : '',
+    useragentdata_model : '',
+    useragentdata_uafullversion : '',
     cpu_core : '',
     device_memory : ''
   },
@@ -149,6 +155,20 @@ var app = new Vue({
         const uad = navigator.userAgentData;
         self.useragentdata_brand = uad.brands[0].brand;
         self.useragentdata_version = uad.brands[0].version;
+        self.useragentdata_mobile = uad.mobile;
+        uad.getHighEntropyValues([
+            "platform",
+            "platformVersion",
+            "architecture",
+            "model",
+            "uaFullVersion"
+           ]).then(res => {
+            self.useragentdata_platform = res.platform;
+            self.useragentdata_platformversion = res.platformVersion;
+            self.useragentdata_architecture = res.architecture;
+            self.useragentdata_model = res.model;
+            self.useragentdata_uafullversion = res.uaFullVersion;
+           }); 
     }
 
     // Private IP
