@@ -1,58 +1,59 @@
-new Vue({
-  el: '#app',
-  data: {
-    user_agent : '',
-    accept_language : '',
-    platform : '',
-    appcodename : '',
-    appname : '',
-    product : '',
-    productsub : '',
-    vendor : '',
-    vendorsub : '',
-    color_depth : '',
-    screen_width : '',
-    screen_height : '',
-    browser_window_width : '',
-    browser_window_height : '',
-    public_ip : '',
-    candidate : '',
-    os : '',
-    browser : '',
-    mobile_type : '',
-    vendor_fragments : '',
-    useragentdata_brands : '',
-    useragentdata_mobile : '',
-    useragentdata_highentropyvalues : '',
-    cpu_core : '',
-    device_memory : ''
-  },
-  created: function () {
+function getMobileType(ua) {
 
-    const self = this;
-	axios.get("https://api.ipify.org/?format=json")
-    	.then(response => {self.public_ip = response.data.ip})
+    let mobile_type = "n/a";
 
-    self.user_agent = navigator.userAgent;
-    self.accept_language = navigator.languages;  
-    self.platform = navigator.platform;
-    self.color_depth = screen.colorDepth;
-    self.screen_width = parent.screen.width;
-    self.screen_height = parent.screen.height;
-    self.cpu_core = navigator.hardwareConcurrency;
-    self.device_memory = navigator.deviceMemory;
-    self.appcodename = navigator.appCodeName;
-    self.appname = navigator.appName;
-    self.product = navigator.product;
-    self.productsub = navigator.productSub; 
-    self.vendor = navigator.vendor;
-    self.vendorsub = navigator.vendorSub;
+    if (ua.indexOf('iphone') > 0 
+        || ua.indexOf('ipod') > 0 
+        || ua.indexOf('windows phone') > 0
+        || ua.indexOf('blackberry') > 0
+        || (ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0)
+        ) {
 
+       mobile_type = "Mobile";
 
-    var ua = navigator.userAgent.toLowerCase();
+    } else if (ua.indexOf('ipad') > 0
+        || ua.indexOf('kindle') > 0
+        || ua.indexOf('silk') > 0 
+        || (ua.indexOf('android') > 0 && ua.indexOf('tablet') > 0)
+        || (ua.indexOf('windows') > 0 && ua.indexOf('touch') > 0)
+        ) {
 
-    // OS
-    var os = "n/a";
+        mobile_type = "Tablet";
+
+    }
+    return mobile_type;
+}
+
+function getBrowser(ua) {
+
+  let browser = "n/a";
+
+  if (ua.indexOf("iphone") > 0) {
+      browser = "iPhone";
+  } else if (ua.indexOf("ipad") > 0) {
+      browser = "iPad";
+  } else if (ua.indexOf("ipod") > 0) {
+      browser = "iPod";        
+  } else if (ua.indexOf("trident/7.0") > 0) {
+      browser = "IE11";
+  } else if (ua.indexOf("edge") > 0) {
+      browser = "MicroSoft Edge";
+  } else if (ua.indexOf("firefox") > 0) {
+      browser = ua.match(/firefox\/[0-9.]*/gi)[0];        
+  } else if (ua.indexOf("opr") > 0) {
+      browser = "Opera";
+  } else if (ua.indexOf("chrome") > 0) {
+      browser = ua.match(/chrome\/[0-9.]*/gi)[0];
+  } else if (ua.indexOf("safari") > 0) {
+      browser = "Safari";
+  }
+
+  return browser;
+}
+
+function getOS(ua) {
+
+    let os = "n/a";
     if (ua.indexOf("iphone") > 0) {
         os = "iPhone";
     } else if (ua.indexOf("ipad") > 0) {
@@ -90,62 +91,62 @@ new Vue({
     } else if (ua.indexOf("linux") > 0) {
         os = "Linux";
     }
+    return os;
+}
 
-    self.os = os;
+new Vue({
+  el: '#app',
+  data: {
+    user_agent : '',
+    accept_language : '',
+    platform : '',
+    appcodename : '',
+    appname : '',
+    product : '',
+    productsub : '',
+    vendor : '',
+    vendorsub : '',
+    color_depth : '',
+    screen_width : '',
+    screen_height : '',
+    browser_window_width : '',
+    browser_window_height : '',
+    public_ip : '',
+    candidate : '',
+    os : '',
+    browser : '',
+    mobile_type : '',
+    vendor_fragments : '',
+    useragentdata_brands : '',
+    useragentdata_mobile : '',
+    useragentdata_highentropyvalues : '',
+    cpu_core : '',
+    device_memory : ''
+  },
+  created: function () {
 
-    // Browser
-    var browser = "n/a";
+    const self = this;
+    self.user_agent = navigator.userAgent;
+    self.accept_language = navigator.languages;  
+    self.platform = navigator.platform;
+    self.color_depth = screen.colorDepth;
+    self.screen_width = parent.screen.width;
+    self.screen_height = parent.screen.height;
+    self.cpu_core = navigator.hardwareConcurrency;
+    self.device_memory = navigator.deviceMemory;
+    self.appcodename = navigator.appCodeName;
+    self.appname = navigator.appName;
+    self.product = navigator.product;
+    self.productsub = navigator.productSub; 
+    self.vendor = navigator.vendor;
+    self.vendorsub = navigator.vendorSub;
 
-    if (ua.indexOf("iphone") > 0) {
-        browser = "iPhone";
-    } else if (ua.indexOf("ipad") > 0) {
-        browser = "iPad";
-    } else if (ua.indexOf("ipod") > 0) {
-        browser = "iPod";        
-    } else if (ua.indexOf("trident/7.0") > 0) {
-        browser = "IE11";
-    } else if (ua.indexOf("edge") > 0) {
-        browser = "MicroSoft Edge";
-    } else if (ua.indexOf("firefox") > 0) {
-        browser = ua.match(/firefox\/[0-9.]*/gi)[0];        
-    } else if (ua.indexOf("opr") > 0) {
-        browser = "Opera";
-    } else if (ua.indexOf("chrome") > 0) {
-        browser = ua.match(/chrome\/[0-9.]*/gi)[0];
-    } else if (ua.indexOf("safari") > 0) {
-        browser = "Safari";
-    }
-
-    self.browser = browser;
-
-
-    // mobile type 
-    var mobile_type = "n/a";
-
-    if (ua.indexOf('iphone') > 0 
-        || ua.indexOf('ipod') > 0 
-        || ua.indexOf('windows phone') > 0
-        || ua.indexOf('blackberry') > 0
-        || (ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0)
-        ) {
-
-       mobile_type = "スマートフォン";
-
-    } else if (ua.indexOf('ipad') > 0
-        || ua.indexOf('kindle') > 0
-        || ua.indexOf('silk') > 0 
-        || (ua.indexOf('android') > 0 && ua.indexOf('tablet') > 0)
-        || (ua.indexOf('windows') > 0 && ua.indexOf('touch') > 0)
-        ) {
-
-        mobile_type = "タブレット";
-
-    }
-
-    this.mobile_type = mobile_type;
+    const ua = navigator.userAgent.toLowerCase();
+    self.os = getOS(ua);  
+    self.browser = getBrowser(ua);
+    self.mobile_type = getMobileType(ua);
 
     // vendor_fragments
-
     axios.get("vendor_fragments.json")
         .then(response => {
             for (var item in response.data) {
@@ -175,31 +176,28 @@ new Vue({
     // Private IP
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
     var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
-    pc.createDataChannel('');//create a bogus data channel
-    pc.createOffer(pc.setLocalDescription.bind(pc), noop);// create offer and set local description
-    pc.onicecandidate = function(ice)
-    {
-     if (ice && ice.candidate && ice.candidate.candidate)
-     {
-        console.log(ice);
-        console.log(ice.candidate);
-        console.log(ice.candidate.candidate);
+    pc.createDataChannel('');
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);
+    pc.onicecandidate = function(ice) {
+      if (ice && ice.candidate && ice.candidate.candidate) {
         self.candidate = ice.candidate.candidate;
         pc.onicecandidate = noop;
-     }
+      }
     };
 
+    // Window
     self.browser_window_width = window.innerWidth;
     self.browser_window_height = window.innerHeight;
-
     window.addEventListener('resize', function() {
         self.browser_window_width = window.innerWidth;
         self.browser_window_height = window.innerHeight;
     }, false);
 
-
-
+  },methods: {
+    getPublicIP : function (event) {
+        const self = this;
+        axios.get("https://api.ipify.org/?format=json")
+        .then(response => {self.public_ip = response.data.ip})
+    }
   }
-
-})
-
+}) 

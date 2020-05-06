@@ -44,7 +44,9 @@
 <h1>My Browser Info</h1>
 <h2>NetWork</h2>
 <dl> 
-    <dt>Public IP</dt>
+    <dt>Public IP   
+		<button v-on:click="getPublicIP">GET!</button>
+	</dt>
     <dd>{{ public_ip }}</dd>
     <dt>ICE Candidate</dt>
     <dd>{{ candidate }}</dd>
@@ -91,9 +93,9 @@
     <dd>{{ user_agent }}</dd>
 </dl>
 <h2>UserAgentData</h2>
-<p style="text-align:left">
+<div style="text-align:left">
 	<a href="https://www.pcmag.com/how-to/how-to-enhance-chrome-with-googles-experimental-flags">※How to Enhance Chrome With Google's Experimental 'Flags'</a>
-</p>
+</div>
 <dl> 
     <dt>Brands</dt>
     <dd>{{ useragentdata_brands }}</dd>
