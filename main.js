@@ -115,6 +115,7 @@ new Vue({
     candidate : '',
     os : '',
     browser : '',
+    battery_level : '',
     mobile_type : '',
     vendor_fragments : '',
     useragentdata_brands : '',
@@ -192,6 +193,18 @@ new Vue({
         self.browser_window_width = window.innerWidth;
         self.browser_window_height = window.innerHeight;
     }, false);
+
+    if (navigator.getBattery) {
+        navigator.getBattery().then(function(battery) {
+            updateLevelInfo();
+            battery.addEventListener('levelchange', function(){
+            updateLevelInfo();
+            });
+            function updateLevelInfo() {
+            self.battery_level = battery.level * 100 + "%";
+            }
+        });
+    }
 
   },methods: {
     getPublicIP : function (event) {
