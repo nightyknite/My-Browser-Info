@@ -6,7 +6,7 @@
 	<title>My Browser Info</title>
 	<style>
 	#app {text-align: center}
-	h1 {font-size: 100%}
+	h1,h2 {font-size: 100%;text-align:left}
 	table,tr,td {with:100%}
 	dl,
 	dt,
@@ -41,55 +41,80 @@
 </head>
 <body>
 <div id="app">
-	<h1>My Browser Info</h1>
-<dl>
+<h1>My Browser Info</h1>
+<h2>NetWork</h2>
+<dl> 
     <dt>Public IP</dt>
     <dd>{{ public_ip }}</dd>
     <dt>ICE Candidate</dt>
     <dd>{{ candidate }}</dd>
-    <dt>Accept-Language</dt>
-    <dd>{{ accept_language }}</dd>
-    <dt>Platform</dt>
-    <dd>{{ platform }}</dd>
-    <dt>Screen Width</dt>
-    <dd>{{ screen_width }}</dd>
-    <dt>Screen Height</dt>
-    <dd>{{ screen_height }}</dd>
+</dl>
+<h2>Window</h2>
+<dl> 
 	<dt>Browser Window Width</dt>
     <dd>{{ browser_window_width }}</dd>
     <dt>Browser Window Height</dt>
     <dd>{{ browser_window_height }}</dd>
-    <dt>CPU Core</dt>
+</dl>
+<h2>Screen</h2>
+<dl> 
+    <dt>Color Depth</dt>
+    <dd>{{ color_depth }}</dd>
+	<dt>Screen Width</dt>
+    <dd>{{ screen_width }}</dd>
+    <dt>Screen Height</dt>
+    <dd>{{ screen_height }}</dd>
+</dl>
+<h2>Navigator</h2>
+<dl>
+    <dt>Accept-Language</dt>
+    <dd>{{ accept_language }}</dd>
+    <dt>Platform</dt>
+    <dd>{{ platform }}</dd>
+	<dt>appcodename</dt>
+    <dd>{{ appcodename }}</dd>
+	<dt>appname</dt>
+    <dd>{{ appname }}</dd>
+	<dt>product</dt>
+    <dd>{{ product }}</dd>
+	<dt>productsub</dt>
+    <dd>{{ productsub }}</dd>
+	<dt>vendor</dt>
+    <dd>{{ vendor }}</dd>
+	<dt>vendorsub</dt>
+    <dd>{{ vendorsub }}</dd>
+	<dt>CPU Core</dt>
     <dd>{{ cpu_core }}</dd>
     <dt>Device Memory</dt>
     <dd>{{ device_memory }}</dd>
 	<dt>UserAgent</dt>
     <dd>{{ user_agent }}</dd>
+</dl>
+<h2>UserAgentData</h2>
+<p style="text-align:left">
+	<a href="https://www.pcmag.com/how-to/how-to-enhance-chrome-with-googles-experimental-flags">※How to Enhance Chrome With Google's Experimental 'Flags'</a>
+</p>
+<dl> 
+    <dt>Brands</dt>
+    <dd>{{ useragentdata_brands }}</dd>
+    <dt> Mobile</dt>
+	<dd>{{ useragentdata_mobile }}</dd>
+    <dt> HighEntropyValues</dt>
+	<dd>{{ useragentdata_highentropyvalues}}</dd>
+</dl>
+
+<h2>Misc</h2>
+<dl> 
     <dt>OS</dt>
     <dd>{{ os }}</dd>
     <dt>Browser</dt>
     <dd>{{ browser }}</dd>
-    <dt>スマートフォン/タブレット</dt>
+    <dt>mobile/tablet</dt>
     <dd>{{ mobile_type }}</dd>
     <dt>Vendor Fragments</dt>
     <dd>{{ vendor_fragments }}</dd>
-    <dt>UserAgentData Brand</dt>
-    <dd>{{ useragentdata_brand }}</dd>
-    <dt>UserAgentData Version</dt>
-    <dd>{{ useragentdata_version }}</dd>
-    <dt>UserAgentData Mobile</dt>
-	<dd>{{ useragentdata_mobile }}</dd>
-    <dt>UserAgentData Platform</dt>
-	<dd>{{ useragentdata_platform }}</dd>
-    <dt>UserAgentData PlatformVersion</dt>
-	<dd>{{ useragentdata_platformversion }}</dd>
-    <dt>UserAgentData Architecture</dt>
-	<dd>{{ useragentdata_architecture }}</dd>		
-    <dt>UserAgentData Model</dt>
-	<dd>{{ useragentdata_model }}</dd>	
-    <dt>UserAgentData UAFullVersion</dt>
-	<dd>{{ useragentdata_uafullversion }}</dd>	
 </dl>
+
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>

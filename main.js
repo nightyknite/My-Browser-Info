@@ -1,9 +1,16 @@
-var app = new Vue({
+new Vue({
   el: '#app',
   data: {
     user_agent : '',
     accept_language : '',
     platform : '',
+    appcodename : '',
+    appname : '',
+    product : '',
+    productsub : '',
+    vendor : '',
+    vendorsub : '',
+    color_depth : '',
     screen_width : '',
     screen_height : '',
     browser_window_width : '',
@@ -14,14 +21,9 @@ var app = new Vue({
     browser : '',
     mobile_type : '',
     vendor_fragments : '',
-    useragentdata_brand : '',
-    useragentdata_version : '',
+    useragentdata_brands : '',
     useragentdata_mobile : '',
-    useragentdata_platform : '',
-    useragentdata_platformversion : '',
-    useragentdata_architecture : '',
-    useragentdata_model : '',
-    useragentdata_uafullversion : '',
+    useragentdata_highentropyvalues : '',
     cpu_core : '',
     device_memory : ''
   },
@@ -32,16 +34,20 @@ var app = new Vue({
     	.then(response => {self.public_ip = response.data.ip})
 
     self.user_agent = navigator.userAgent;
-
-    self.accept_language = navigator.languages;
-    
+    self.accept_language = navigator.languages;  
     self.platform = navigator.platform;
-
+    self.color_depth = screen.colorDepth;
     self.screen_width = parent.screen.width;
     self.screen_height = parent.screen.height;
-
     self.cpu_core = navigator.hardwareConcurrency;
     self.device_memory = navigator.deviceMemory;
+    self.appcodename = navigator.appCodeName;
+    self.appname = navigator.appName;
+    self.product = navigator.product;
+    self.productsub = navigator.productSub; 
+    self.vendor = navigator.vendor;
+    self.vendorsub = navigator.vendorSub;
+
 
     var ua = navigator.userAgent.toLowerCase();
 
@@ -153,8 +159,7 @@ var app = new Vue({
     
 　　 if (navigator.userAgentData) {
         const uad = navigator.userAgentData;
-        self.useragentdata_brand = uad.brands[0].brand;
-        self.useragentdata_version = uad.brands[0].version;
+        self.useragentdata_brands = JSON.stringify(uad.brands);
         self.useragentdata_mobile = uad.mobile;
         uad.getHighEntropyValues([
             "platform",
@@ -163,16 +168,11 @@ var app = new Vue({
             "model",
             "uaFullVersion"
            ]).then(res => {
-            self.useragentdata_platform = res.platform;
-            self.useragentdata_platformversion = res.platformVersion;
-            self.useragentdata_architecture = res.architecture;
-            self.useragentdata_model = res.model;
-            self.useragentdata_uafullversion = res.uaFullVersion;
+            self.useragentdata_highentropyvalues = JSON.stringify(res);
            }); 
     }
 
     // Private IP
-    // https://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
     var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
     pc.createDataChannel('');//create a bogus data channel
