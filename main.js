@@ -209,8 +209,26 @@ new Vue({
   },methods: {
     getPublicIP : function (event) {
         const self = this;
-        axios.get("https://api.ipify.org/?format=json")
-        .then(response => {self.public_ip = response.data.ip})
+        const pc = new RTCPeerConnection({
+            iceServers: [
+              {
+                urls: ["stun:stun.l.google.com:19302"]
+              }
+            ]
+        });
+        pc.onicecandidate = e => {
+        if (e.candidate) {
+            const [ip, , , type] = e.candidate.candidate.split(" ", 8).slice(4);
+            if (type == "srflx") {
+            self.public_ip = ip;
+            }      
+        }
+        };
+        pc.onnegotiationneeded = async () => {
+        await pc.setLocalDescription(await pc.createOffer());
+        };
+        pc.createDataChannel("");
+
     }
   }
 }) 
