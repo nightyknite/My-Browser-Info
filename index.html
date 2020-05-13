@@ -73,10 +73,12 @@
     <dd>{{ accept_language }}</dd>
     <dt>Platform</dt>
     <dd>{{ platform }}</dd>
-	<dt>appcodename</dt>
+	<dt>appCodeName</dt>
     <dd>{{ appcodename }}</dd>
-	<dt>appname</dt>
-    <dd>{{ appname }}</dd>
+	<dt>appName</dt>
+	<dd>{{ appname }}</dd>
+	<dt>appVersion</dt>
+	<dd>{{ appVersion }}</dd>
 	<dt>product</dt>
     <dd>{{ product }}</dd>
 	<dt>productsub</dt>
@@ -85,12 +87,34 @@
     <dd>{{ vendor }}</dd>
 	<dt>vendorsub</dt>
     <dd>{{ vendorsub }}</dd>
-	<dt>CPU Core</dt>
+	<dt>hardwareConcurrency(CPU Core)</dt>
     <dd>{{ cpu_core }}</dd>
     <dt>Device Memory</dt>
-    <dd>{{ device_memory }}</dd>
+	<dd>{{ device_memory }}</dd>
+    <dt>cookieEnabled</dt>
+	<dd>{{ cookieEnabled }}</dd>
+    <dt>onLine</dt>
+	<dd>{{ onLine }}</dd>
+    <dt>maxTouchPoints</dt>
+	<dd>{{ maxTouchPoints }}</dd>
 	<dt>UserAgent</dt>
     <dd>{{ user_agent }}</dd>
+</dl>
+
+<h2>Connection</h2>
+<dl> 
+    <dt>downlink</dt>
+    <dd>{{ connection_downlink }}</dd>
+    <dt>downlinkMax</dt>
+	<dd>{{ connection_downlinkMax }}</dd>
+    <dt>effectiveType</dt>
+	<dd>{{ connection_effectiveType }}</dd>
+    <dt>rtt</dt>
+	<dd>{{ connection_rtt }}</dd>
+	<dt>saveData</dt>
+	<dd>{{ connection_saveData }}</dd>
+	<dt>type</dt>
+	<dd>{{ connection_type }}</dd>
 </dl>
 
 <h2>Battery</h2>
@@ -112,9 +136,11 @@
 	<dd>{{ useragentdata_highentropyvalues}}</dd>
 </dl>
 
-<h2>Misc</h2>
+<h2>Parse User Agent</h2>
 <dl> 
-    <dt>OS</dt>
+	<dt>UserAgent</dt>
+    <dd>{{ user_agent }}</dd>
+	<dt>OS</dt>
     <dd>{{ os }}</dd>
     <dt>Browser</dt>
     <dd>{{ browser }}</dd>

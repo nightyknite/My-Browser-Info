@@ -102,6 +102,7 @@ new Vue({
     platform : '',
     appcodename : '',
     appname : '',
+    appVersion : '',
     product : '',
     productsub : '',
     vendor : '',
@@ -116,13 +117,22 @@ new Vue({
     os : '',
     browser : '',
     battery_level : '',
+    connection_downlink : '',
+    connection_downlinkMax : '',
+    connection_effectiveType : '',
+    connection_rtt : '',
+    connection_saveData : '',
+    connection_type : '',
     mobile_type : '',
     vendor_fragments : '',
     useragentdata_brands : '',
     useragentdata_mobile : '',
     useragentdata_highentropyvalues : '',
     cpu_core : '',
-    device_memory : ''
+    device_memory : '',
+    cookieEnabled : '',
+    onLine : '',
+    maxTouchPoints : ''
   },
   created: function () {
 
@@ -137,10 +147,23 @@ new Vue({
     self.device_memory = navigator.deviceMemory;
     self.appcodename = navigator.appCodeName;
     self.appname = navigator.appName;
+    self.appVersion = navigator.appVersion;
     self.product = navigator.product;
     self.productsub = navigator.productSub; 
     self.vendor = navigator.vendor;
     self.vendorsub = navigator.vendorSub;
+    self.cookieEnabled = navigator.cookieEnabled;
+    self.onLine = navigator.onLine;
+    self.maxTouchPoints = navigator.maxTouchPoints;
+
+    if (navigator.connection) {
+        self.connection_downlink = navigator.connection.downlink;
+        self.connection_downlinkMax = navigator.connection.downlinkMax;
+        self.connection_effectiveType = navigator.connection.effectiveType;
+        self.connection_rtt = navigator.connection.rtt;
+        self.connection_saveData = navigator.connection.saveData;
+        self.connection_type = navigator.connection.type;
+    }
 
     const ua = navigator.userAgent.toLowerCase();
     self.os = getOS(ua);  
@@ -173,9 +196,8 @@ new Vue({
             self.useragentdata_highentropyvalues = JSON.stringify(res);
            }); 
     }
-
+    
     // Private IP
-    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
     var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
     pc.createDataChannel('');
     pc.createOffer(pc.setLocalDescription.bind(pc), noop);
@@ -217,12 +239,12 @@ new Vue({
             ]
         });
         pc.onicecandidate = e => {
-        if (e.candidate) {
-            const [ip, , , type] = e.candidate.candidate.split(" ", 8).slice(4);
-            if (type == "srflx") {
-            self.public_ip = ip;
-            }      
-        }
+            if (e.candidate) {
+                const [ip, , , type] = e.candidate.candidate.split(" ", 8).slice(4);
+                if (type == "srflx") {
+                self.public_ip = ip;
+                }      
+            }
         };
         pc.onnegotiationneeded = async () => {
         await pc.setLocalDescription(await pc.createOffer());
