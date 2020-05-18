@@ -46,10 +46,15 @@
 <dl> 
     <dt>Public IP   
 		<button v-on:click="getPublicIP">GET!</button>
+		※google stun server
 	</dt>
     <dd>{{ public_ip }}</dd>
-    <dt>ICE Candidate</dt>
-    <dd>{{ candidate }}</dd>
+    <dt>Private IP  ※ping UUID.local</dt>
+    <dd>{{ private_ip }}</dd>
+	<dt>geoplugin <button v-on:click="getIPInfo">GET!</button> 
+		※http://www.geoplugin.net
+	</dt>
+    <dd>{{ip_info}}</dd>	
 </dl>
 <h2>Window</h2>
 <dl> 
@@ -154,6 +159,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios-jsonp/dist/index.min.js"></script>
 <script src="main.js" defer ></script>
 </body>
 </html>

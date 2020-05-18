@@ -113,6 +113,7 @@ new Vue({
     browser_window_width : '',
     browser_window_height : '',
     public_ip : '',
+    private_ip : '',
     candidate : '',
     os : '',
     browser : '',
@@ -132,7 +133,8 @@ new Vue({
     device_memory : '',
     cookieEnabled : '',
     onLine : '',
-    maxTouchPoints : ''
+    maxTouchPoints : '',
+    ip_info : ''
   },
   created: function () {
 
@@ -202,8 +204,9 @@ new Vue({
     pc.createDataChannel('');
     pc.createOffer(pc.setLocalDescription.bind(pc), noop);
     pc.onicecandidate = function(ice) {
-      if (ice && ice.candidate && ice.candidate.candidate) {
-        self.candidate = ice.candidate.candidate;
+      if (ice && ice.candidate) {
+        const [ip, , , type] = ice.candidate.candidate.split(" ", 8).slice(4);
+        self.private_ip = ip;
         pc.onicecandidate = noop;
       }
     };
@@ -251,6 +254,13 @@ new Vue({
         };
         pc.createDataChannel("");
 
+    }, getIPInfo : function (event) {
+        const self = this;
+        axios({
+            url: 'http://www.geoplugin.net/json.gp'
+          }).then((res) => {
+            self.ip_info = res.data;
+          });
     }
-  }
+}
 }) 
