@@ -110,6 +110,14 @@ new Vue({
     color_depth : '',
     screen_width : '',
     screen_height : '',
+    avail_height : '',
+    avail_left : '',
+    avail_top : '',
+    avail_width : '',
+    color_depth : '',
+    pixel_depth : '',
+    orientation_type : '',
+    orientation_angle : '',
     browser_window_width : '',
     browser_window_height : '',
     public_ip : '',
@@ -152,6 +160,13 @@ new Vue({
     self.color_depth = screen.colorDepth;
     self.screen_width = parent.screen.width;
     self.screen_height = parent.screen.height;
+    self.avail_height = screen.availHeight;
+    self.avail_left = screen.availLeft;
+    self.avail_top = screen.availTop;
+    self.avail_width = screen.availTop;
+    self.pixel_depth = screen.pixelDepth;
+    self.orientation_type = screen.orientation.type;
+    self.orientation_angle = screen.orientation.angle;
     self.cpu_core = navigator.hardwareConcurrency;
     self.device_memory = navigator.deviceMemory;
     self.appcodename = navigator.appCodeName;
