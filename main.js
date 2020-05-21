@@ -272,12 +272,6 @@ new Vue({
             self.heading = position.coords.heading;
             self.speed = position.coords.speed;
         });
-
-        axios({
-            url: 'https://www.geoplugin.net/json.gp'
-          }).then((res) => {
-            self.ip_info = res.data;
-          });
     }
 }
 }) 
