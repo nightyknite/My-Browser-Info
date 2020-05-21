@@ -163,7 +163,7 @@ new Vue({
     self.avail_height = screen.availHeight;
     self.avail_left = screen.availLeft;
     self.avail_top = screen.availTop;
-    self.avail_width = screen.availTop;
+    self.avail_width = screen.availWidth;
     self.pixel_depth = screen.pixelDepth;
     self.orientation_type = screen.orientation.type;
     self.orientation_angle = screen.orientation.angle;
