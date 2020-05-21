@@ -134,8 +134,15 @@ new Vue({
     cookieEnabled : '',
     onLine : '',
     maxTouchPoints : '',
-    ip_info : ''
-  },
+    ip_info : '',
+    latitude : '',
+    longitude : '',
+    altitude : '',
+    accuracy : '',
+    altitudeaccuracy : '',
+    heading : '',
+    speed : ''
+},
   created: function () {
 
     const self = this;
@@ -254,10 +261,20 @@ new Vue({
         };
         pc.createDataChannel("");
 
-    }, getIPInfo : function (event) {
+    }, getGeo : function (event) {
         const self = this;
+        navigator.geolocation.getCurrentPosition((position) => {
+            self.latitude = position.coords.latitude;
+            self.longitude = position.coords.longitude;
+            self.altitude = position.coords.altitude;
+            self.accuracy = position.coords.accuracy;
+            self.altitudeaccuracy = position.coords.altitudeAccuracy;
+            self.heading = position.coords.heading;
+            self.speed = position.coords.speed;
+        });
+
         axios({
-            url: 'http://www.geoplugin.net/json.gp'
+            url: 'https://www.geoplugin.net/json.gp'
           }).then((res) => {
             self.ip_info = res.data;
           });

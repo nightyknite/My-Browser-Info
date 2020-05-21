@@ -52,6 +52,23 @@
     <dt>Private IP  ※ping UUID.local</dt>
     <dd>{{ private_ip }}</dd>
 </dl>
+<h2>Geolocation <button v-on:click="getGeo">GET!</button> </h2>
+<dl> 
+	<dt>Latitude  </dt>
+    <dd>{{ latitude }}</dd>
+    <dt>Longitude</dt>
+    <dd>{{ longitude }}</dd>
+    <dt>Altitude</dt>
+    <dd>{{ altitude }}</dd>
+    <dt>Accuracy</dt>
+    <dd>{{ accuracy }}</dd>
+    <dt>AltitudeAccuracy</dt>
+    <dd>{{ altitudeaccuracy }}</dd>
+    <dt>Heading</dt>
+    <dd>{{ heading }}</dd>
+    <dt>Speed</dt>
+    <dd>{{ speed }}</dd>
+</dl>
 <h2>Window</h2>
 <dl> 
 	<dt>Browser Window Width</dt>
