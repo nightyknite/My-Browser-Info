@@ -7,7 +7,7 @@
 	<style>
 	#app {text-align: center}
 	h1,h2 {font-size: 100%;text-align:left}
-	table,tr,td {with:100%}
+	table,tr,td {width:100%}
 	dl,
 	dt,
 	dd {
@@ -51,10 +51,6 @@
     <dd>{{ public_ip }}</dd>
     <dt>Private IP  ※ping UUID.local</dt>
     <dd>{{ private_ip }}</dd>
-	<dt>geoplugin <button v-on:click="getIPInfo">GET!</button> 
-		※http://www.geoplugin.net
-	</dt>
-    <dd>{{ip_info}}</dd>	
 </dl>
 <h2>Window</h2>
 <dl> 
