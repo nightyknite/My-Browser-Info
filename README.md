@@ -4,7 +4,8 @@
 https://nightyknite.github.io/My-Browser-Info/index.html
 
 
-Private IPはStackOverFlowにあったサンプル。WebRTC用にあるRTCPeerConnectionを利用しているらしい。
-https://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
-ChromeだとPrivate IPが取得できなくなっている。FireFoxの場合は出来る。代わりに元々Private IPなどの情報が含まれていたICE Candidateを出力
+Public IPは、Google提供のSTUNサーバ から取得
+Private IPは、IPアドレスではなくUUID.local形式になる。
+``ping UUID.local形式`` を行うことでPrivate IPが取得できる。
+(Windows10の場合はPowerShellのコンソール上で行うこと)
 
