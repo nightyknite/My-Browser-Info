@@ -149,7 +149,8 @@ new Vue({
     accuracy : '',
     altitudeaccuracy : '',
     heading : '',
-    speed : ''
+    speed : '',
+    canvas_dataurl : ''
 },
   created: function () {
 
@@ -287,6 +288,21 @@ new Vue({
             self.heading = position.coords.heading;
             self.speed = position.coords.speed;
         });
+    }, getCanvasFingerPrint : function () {
+        // 
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var txt = 'http://valve.github.io';
+        ctx.textBaseline = "top";
+        ctx.font = "14px 'Arial'";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillStyle = "#f60";
+        ctx.fillRect(125,1,62,20);
+        ctx.fillStyle = "#069";
+        ctx.fillText(txt, 2, 15);
+        ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+        ctx.fillText(txt, 4, 17); 
+        this.canvas_dataurl = canvas.toDataURL();       
     }
 }
 }) 

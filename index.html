@@ -69,6 +69,17 @@
     <dt>Speed</dt>
     <dd>{{ speed }}</dd>
 </dl>
+<h2>Canvas FingerPrint <button v-on:click="getCanvasFingerPrint">GET!</button>
+ </h2>
+ <div style="text-align:left">
+    ※https://github.com/Valve/fingerprintjs
+ </div>
+<dl> 
+    <dt>Canvas DataUrl</dt>
+    <dd>{{canvas_dataurl}}</dd>
+    <dt>Canvas Image </dt>
+    <dd><img v-bind:src="canvas_dataurl" /></dd>
+</dl>
 <h2>Window</h2>
 <dl> 
 	<dt> Window Width</dt>
