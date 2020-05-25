@@ -150,7 +150,8 @@ new Vue({
     altitudeaccuracy : '',
     heading : '',
     speed : '',
-    canvas_dataurl : ''
+    canvas_dataurl : '',
+    map_url : ''
 },
   created: function () {
 
@@ -287,6 +288,7 @@ new Vue({
             self.altitudeaccuracy = position.coords.altitudeAccuracy;
             self.heading = position.coords.heading;
             self.speed = position.coords.speed;
+            self.map_url = "https://maps.google.co.jp/maps?output=embed&q=" + position.coords.latitude + "," + position.coords.longitude;
         });
     }, getCanvasFingerPrint : function () {
         // 

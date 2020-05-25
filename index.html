@@ -68,6 +68,11 @@
     <dd>{{ heading }}</dd>
     <dt>Speed</dt>
     <dd>{{ speed }}</dd>
+    <dt>Map</dt>
+    <dd>
+        <iframe :src="map_url" frameborder="0" style="border:0;" >
+        </iframe>
+    </dd>
 </dl>
 <h2>Canvas FingerPrint <button v-on:click="getCanvasFingerPrint">GET!</button>
  </h2>
