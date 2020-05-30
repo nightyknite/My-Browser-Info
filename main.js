@@ -151,7 +151,10 @@ new Vue({
     heading : '',
     speed : '',
     canvas_dataurl : '',
-    map_url : ''
+    map_url : '',
+    performance_jsHeapSizeLimit : '',
+    performance_totalJSHeapSize : '',
+    performance_usedJSHeapSize : ''
 },
   created: function () {
 
@@ -189,6 +192,11 @@ new Vue({
         self.connection_rtt = navigator.connection.rtt;
         self.connection_saveData = navigator.connection.saveData;
         self.connection_type = navigator.connection.type;
+    }
+    if (performance.memory) {
+        self.performance_jsHeapSizeLimit = performance.memory.jsHeapSizeLimit;
+        self.performance_totalJSHeapSize = performance.memory.totalJSHeapSize;
+        self.performance_usedJSHeapSize = performance.memory.usedJSHeapSize;
     }
 
     const ua = navigator.userAgent.toLowerCase();
